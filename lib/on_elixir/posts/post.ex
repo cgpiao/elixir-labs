@@ -2,6 +2,8 @@ defmodule OnElixir.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+
   schema "posts" do
     field :abstract, :string
     field :abstract_rich, :string
