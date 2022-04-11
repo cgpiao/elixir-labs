@@ -1,0 +1,38 @@
+<div class="container mx-auto flex columns-12">
+   <div class="w-1/3 mx-auto">
+      <h1 class="text-3xl bold mt-24 mb-3">注册</h1>
+
+      <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+
+         <div class="mb-2 flex-col">
+            <div class="flex items-center">
+               <%= label f, :email, class: "lg:w-1/4 w-1/3" %>
+               <%= email_input f, :email, required: true, class: "bg-gray-200 h-11 flex-1 outline-none p-3" %>
+            </div>
+            <%= error_tag f, :email %>
+         </div>
+
+         <div class="mb-2 flex-col">
+            <div class="flex items-center">
+               <%= label f, :password, class: "lg:w-1/4 w-1/3" %>
+               <%= password_input f, :password, required: true, class: "bg-gray-200 h-11 flex-1 outline-none p-3" %>
+            </div>
+
+            <%= error_tag f, :password %>
+         </div>
+         <div class="mb-2">
+            <%= label f, :remember_me, "Keep me logged in for 60 days" %>
+            <%= checkbox f, :remember_me %>
+         </div>
+
+         <div class="mt-6">
+            <%= submit "注册", class: "w-full h-11 bg-blue-400 rounded hover:bg-blue-500"%>
+         </div>
+      </.form>
+
+      <p class="mt-10">
+         <%= link "登录", to: Routes.user_session_path(@conn, :new) %> |
+         <%= link "忘记密码?", to: Routes.user_reset_password_path(@conn, :new) %>
+      </p>
+   </div>
+</div>

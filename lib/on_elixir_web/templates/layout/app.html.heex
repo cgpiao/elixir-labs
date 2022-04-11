@@ -3,7 +3,7 @@
     <a href="https://flowbite.com" class="flex items-center">
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Elixir-Labs</span>
     </a>
-    <div class="ml-4 hidden w-full md:block md:w-auto" id="main-menu">
+    <div class="ml-4 hidden flex-1 md:block md:w-auto" id="main-menu">
       <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
         <li class="ml-3">
           <a href="/" class="block rounded bg-transparent dark:text-white" :class="activeRoute === '/' ? 'text-blue-700' : 'text-gray-700'">首页</a>
@@ -13,6 +13,7 @@
         </li>
       </ul>
     </div>
+    <%= render "_user_menu.html", assigns %>
   </div>
 </nav>
 <%= @inner_content %>

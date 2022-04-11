@@ -1,19 +1,14 @@
-# OnElixir
-
-To start your Phoenix server:
-
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## Deploy
+### Env
+```shell
+export SECRET_KEY_BASE=
+export DATABASE_URL=ecto://user:pwd@host/db
+```
+### Command
+```
+  mix deps.get --only prod
+  MIX_ENV=prod mix compile
+  MIX_ENV=prod mix ecto.migrate
+  MIX_ENV=prod mix assets.deploy
+  PORT=4001 MIX_ENV=prod elixir --erl "-detached" -S mix phx.server
+```

@@ -20,4 +20,20 @@ defmodule OnElixir.PostsFixtures do
 
     post
   end
+
+  @doc """
+  Generate a tag.
+  """
+  def tag_fixture(attrs \\ %{}) do
+    {:ok, tag} =
+      attrs
+      |> Enum.into(%{
+        description: "some description",
+        name: "some name",
+        posts_count: 42
+      })
+      |> OnElixir.Posts.create_tag()
+
+    tag
+  end
 end
