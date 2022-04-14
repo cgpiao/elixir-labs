@@ -1,4 +1,4 @@
-defmodule OnElixirWeb.CategoryController do
+defmodule OnElixirWeb.Admin.CategoryController do
    use OnElixirWeb, :controller
 
    alias OnElixir.Categories
@@ -11,7 +11,10 @@ defmodule OnElixirWeb.CategoryController do
 
    def new(conn, _params) do
       categories = Categories.list_categories()
+         |> Enum.map(fn cate -> [{cate.id, cate.name}] end)
+      IO.inspect categories
       changeset = Categories.change_category(%Category{})
+
       render(conn, "new.html", changeset: changeset, categories: categories)
    end
 

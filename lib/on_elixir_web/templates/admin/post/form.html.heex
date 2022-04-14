@@ -1,0 +1,76 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js" integrity="sha512-/Swpp6aCQ0smuZ+zpklJqMClcUlvxhpLf9aAcM7JjJrj2waCU4dikm3biOtMVAflOOeniW9qzaNXNrbOAOWFCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-elixir.min.js" integrity="sha512-zFiGuXuwrgk7h6wKd4Ll7hkPTP9LVEknt2+oy5tsqgTSV1SpX/soHJvVy1Y21fAgHem9E1trZIsmuiRL9i2xOA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.tiny.cloud/1/kyep40vwytidb0l6shoh2dfpiz15oiaaucajfi28y6mqofya/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<div class="container mx-auto">
+  <.form let={f} for={@changeset} action={@action}>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <%= hidden_input f, :content_rich %>
+    <%= hidden_input f, :abstract_rich %>
+
+    <div class="mb-4">
+       <h1>
+         <%= text_input f, :title, placeholder: "Title", class: "w-full block mb-2 text-xl font-medium text-gray-900" %>
+       </h1>
+      <%= error_tag f, :title %>
+    </div>
+    <div class="mb-4">
+      <%= textarea f, :abstract, placeholder: "Abstract", class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" %>
+      <%= error_tag f, :abstract %>
+    </div>
+    <div class="mb-4">
+      <%= textarea f, :content, placeholder: "Content", class: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" %>
+      <%= error_tag f, :content %>
+    </div>
+    <div>
+      <%= submit "Save" %>
+    </div>
+  </.form>
+</div>
+
+<script>
+let codesample_languages = [
+  { text: 'HTML/XML', value: 'markup' },
+  { text: 'JavaScript', value: 'javascript' },
+  { text: 'Elixir', value: 'elixir' },
+  { text: 'SQL', value: 'sql' },
+  { text: 'css', value: 'css' },
+]
+let plugins = [
+  'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+  'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking codesample',
+  'table emoticons template paste help'
+];
+let toolbar = ['undo redo | styleselect | forecolor backcolor | bold italic bullist numlist | emoticons link codesample table media'];
+let contentMCE = tinymce.init({
+  selector: '#post_content',
+  menubar: '',
+  plugins,
+  toolbar,
+  codesample_languages,
+  codesample_global_prismjs: true,
+  setup: (editor) => {
+    editor.on('input', (e) => {
+      document.getElementById("post_content_rich").value = e.target.innerHTML
+    });
+  }
+});
+let abstractMCE = tinymce.init({
+  selector: '#post_abstract',
+  menubar: '',
+  plugins,
+  toolbar,
+  codesample_languages,
+  codesample_global_prismjs: true,
+  setup: (editor) => {
+    editor.on('input', (e) => {
+      document.getElementById("post_abstract_rich").value = e.target.innerHTML
+    });
+  }
+});
+</script>

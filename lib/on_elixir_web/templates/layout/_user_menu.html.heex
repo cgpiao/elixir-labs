@@ -1,11 +1,15 @@
 <ul class="flex items-center">
-<%= if @current_user do %>
-  <li>欢迎回来! <%= username(@current_user.email) %></li>
-   <li><%= link "后台", to: Routes.user_settings_path(@conn, :edit), class: "ml-3" %></li>
-  <li><%= link "设置", to: Routes.user_settings_path(@conn, :edit), class: "ml-3" %></li>
-  <li><%= link "退出", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "ml-3" %></li>
-<% else %>
-  <li class=""><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
-  <li class="border border-slate-500 ml-4 py-1 px-2 rounded"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
-<% end %>
+   <%= if @current_user do %>
+   <li>欢迎回来! <%= username(@current_user.email) %></li>
+   <%= if @current_user.is_admin do %>
+   <li><%= link "后台", to: Routes.admin_console_path(@conn, :index), class: "ml-3" %></li>
+   <% end %>
+   <li><%= link "设置", to: Routes.user_settings_path(@conn, :edit), class: "ml-3" %></li>
+   <li><%= link "退出", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "ml-3" %></li>
+   <% else %>
+   <li class=""><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+   <li class="border border-slate-500 ml-4 py-1 px-2 rounded"><%= link "Log in", to: Routes.user_session_path(@conn,
+      :new) %>
+   </li>
+   <% end %>
 </ul>
