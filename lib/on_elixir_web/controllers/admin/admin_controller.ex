@@ -1,4 +1,4 @@
-defmodule OnElixirWeb.AdminController do
+defmodule OnElixirWeb.Admin.AdminController do
    use OnElixirWeb, :controller
 
    def index(conn, _params) do

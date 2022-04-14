@@ -23,7 +23,7 @@ defmodule OnElixirWeb.Admin.CategoryController do
          {:ok, category} ->
             conn
             |> put_flash(:info, "Category created successfully.")
-            |> redirect(to: Routes.category_path(conn, :show, category))
+            |> redirect(to: Routes.admin_category_path(conn, :show, category))
 
          {:error, %Ecto.Changeset{} = changeset} ->
             render(conn, "new.html", changeset: changeset)
@@ -48,7 +48,7 @@ defmodule OnElixirWeb.Admin.CategoryController do
          {:ok, category} ->
             conn
             |> put_flash(:info, "Category updated successfully.")
-            |> redirect(to: Routes.category_path(conn, :show, category))
+            |> redirect(to: Routes.admin_category_path(conn, :show, category))
 
          {:error, %Ecto.Changeset{} = changeset} ->
             render(conn, "edit.html", category: category, changeset: changeset)
@@ -61,6 +61,6 @@ defmodule OnElixirWeb.Admin.CategoryController do
 
       conn
       |> put_flash(:info, "Category deleted successfully.")
-      |> redirect(to: Routes.category_path(conn, :index))
+      |> redirect(to: Routes.admin_category_path(conn, :index))
    end
 end

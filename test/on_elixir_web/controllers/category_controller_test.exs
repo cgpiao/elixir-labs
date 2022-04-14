@@ -9,26 +9,26 @@ defmodule OnElixirWeb.CategoryControllerTest do
 
   describe "index" do
     test "lists all categories", %{conn: conn} do
-      conn = get(conn, Routes.category_path(conn, :index))
+      conn = get(conn, Routes.admin_category_path(conn, :index))
       assert html_response(conn, 200) =~ "Listing Categories"
     end
   end
 
   describe "new category" do
     test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.category_path(conn, :new))
+      conn = get(conn, Routes.admin_category_path(conn, :new))
       assert html_response(conn, 200) =~ "New Category"
     end
   end
 
   describe "create category" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.category_path(conn, :create), category: @create_attrs)
+      conn = post(conn, Routes.admin_category_path(conn, :create), category: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.category_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.admin_category_path(conn, :show, id)
 
-      conn = get(conn, Routes.category_path(conn, :show, id))
+      conn = get(conn, Routes.admin_category_path(conn, :show, id))
       assert html_response(conn, 200) =~ "Show Category"
     end
 
